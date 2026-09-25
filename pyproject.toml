@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gktetris"
+version = "1.0.0"
+description = "A colorful desktop falling-block game with original arcade audio"
+requires-python = ">=3.10"
+dependencies = ["pygame-ce==2.5.8"]
+
+[project.scripts]
+gktetris = "gktetris.app:main"
+
+[tool.setuptools.packages.find]
+include = ["gktetris*"]
