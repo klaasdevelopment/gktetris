@@ -116,8 +116,6 @@ class App:
                 self.pause()
             else:
                 self.clear_keys()
-        elif event.type == pygame.VIDEORESIZE:
-            self.screen = pygame.display.set_mode((max(1, event.w), max(1, event.h)), pygame.RESIZABLE)
         elif event.type == pygame.KEYUP:
             self.pressed.discard(event.key)
             if event.key in self.held_keys:

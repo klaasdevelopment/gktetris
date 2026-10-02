@@ -135,9 +135,12 @@ class AppTests(unittest.TestCase):
 
     def test_all_screens_render_at_different_sizes(self):
         for size in (SIZE, (800, 600), (1400, 800), (400, 700)):
-            self.app.handle(pygame.event.Event(pygame.VIDEORESIZE, w=size[0], h=size[1]))
+            pygame.display.set_mode(size, pygame.RESIZABLE)
+            with patch("pygame.display.set_mode") as set_mode:
+                self.app.handle(pygame.event.Event(pygame.VIDEORESIZE, w=size[0], h=size[1]))
+                set_mode.assert_not_called()
             self.assertEqual(self.app.screen.get_size(), size)
             for state in ("ready", "playing", "paused", "over"):
                 self.app.state = state
                 self.app.render()
-        self.app.handle(pygame.event.Event(pygame.VIDEORESIZE, w=SIZE[0], h=SIZE[1]))
+        pygame.display.set_mode(SIZE, pygame.RESIZABLE)
